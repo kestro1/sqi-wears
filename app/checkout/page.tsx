@@ -1,0 +1,14 @@
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft, MessageCircle, LockKeyhole, CreditCard, ArrowUpRight } from 'lucide-react';
+import { useStore } from '@/components/store/StoreProvider';
+import { CONFIG, orderLink, orderNumber } from '@/components/store/config';
+import CheckoutFields from '@/components/store/CheckoutFields';
+import OrderSummary from '@/components/store/OrderSummary';
+export default function Checkout() {
+  const {items,subtotal} = useStore(); const [customer,setCustomer]=useState({}),[delivery,setDelivery]=useState('Pickup'); const navigate=useNavigate();
+  const fee=CONFIG.delivery[delivery];
+  function submit(e) {e.preventDefault();const details=Object.fromEntries(Object.entries(customer).map(([k,v])=>[k,v.trim()]));const order={number:orderNumber(),items:items.map(i=>({id:i.id,name:i.name,price:i.price,size:i.size,color:i.color,quantity:i.quantity,sizes:i.sizes})),subtotal,delivery:fee,deliveryOption:delivery,customer:details,status:'Awaiting WhatsApp confirmation'};sessionStorage.setItem('sqi_order',JSON.stringify(order));navigate('/order-confirmation');}
+  if(!items.length)return <div className="empty-state"><h1>Your bag is empty.</h1><p>Add a piece you love before checking out.</p><Link className="button" to="/#shop">Continue shopping</Link></div>;
+  return <div className="section checkout-page"><Link className="inline-link" to="/#shop"><ArrowLeft size={15}/> Continue shopping</Link><div className="checkout-heading"><span className="eyebrow">GOOD STYLE IS ALMOST YOURS</span><h1>Checkout<span className="heading-dot">.</span></h1><p>Just a few details, then you're ready to place your order.</p></div><form onSubmit={submit} className="checkout-grid"><div><CheckoutFields customer={customer} setCustomer={setCustomer} delivery={delivery} setDelivery={setDelivery}/><div className="checkout-payment"><div className="checkout-section-title"><span>03</span><h2>Place your order</h2></div><div className="payment-option"><MessageCircle size={21}/><div><strong>Order via WhatsApp</strong><p>Review your order, then send it to SQI Wears to confirm availability, delivery and payment details.</p></div></div><div className="payment-option payment-unavailable"><CreditCard size={21}/><div><strong>Paystack · Setup pending</strong><p>Online payment is not available yet. No payment will be taken, and no payment success will be shown without gateway verification.</p></div></div><button className="button outline wide" type="button" disabled><LockKeyhole size={16}/> Pay Now — unavailable until connected</button></div></div><aside><OrderSummary items={items} subtotal={subtotal} delivery={fee} editable/><button type="submit" className="button wide checkout-submit">Review WhatsApp Order <ArrowUpRight size={18}/></button><p className="checkout-security"><LockKeyhole size={13}/> No card details collected or stored.</p></aside></form></div>;
+}

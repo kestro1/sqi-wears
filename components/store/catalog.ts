@@ -1,0 +1,17 @@
+const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+export const products = [
+  {id:1, name:'Classic Black T-Shirt', category:'T-Shirts', audience:'Men', price:15000, sizes, colors:['Black'], rating:4.8, badge:'BESTSELLER', description:'Your everyday essential, elevated. A soft cotton crewneck with a clean regular fit that works from day to night.'},
+  {id:2, name:'Premium White T-Shirt', category:'T-Shirts', audience:'Men', price:15000, sizes, colors:['White'], rating:4.9, description:'A crisp white staple in soft cotton. Designed with a comfortable neckline and an easy fit for effortless layering.'},
+  {id:3, name:'Oversized Streetwear T-Shirt', category:'T-Shirts', audience:'Men', price:18000, sizes, colors:['Charcoal'], rating:4.8, badge:'NEW', description:'Room to move. A relaxed oversized silhouette with dropped shoulders and a washed charcoal finish.'},
+  {id:4, name:'Premium Black Hoodie', category:'Hoodies', audience:'Men', price:28000, sizes, colors:['Black'], rating:4.9, description:'Comfort meets street style. A substantial, soft hoodie with a kangaroo pocket and a relaxed fit.'},
+  {id:5, name:'Casual Cargo Trousers', category:'Trousers', audience:'Men', price:25000, sizes:['28','30','32','34','36','38'], colors:['Olive'], rating:4.7, description:'Utility, refined. Comfortable cargo trousers with practical pockets and a versatile straight-leg shape.'},
+  {id:6, name:'Classic Denim Jeans', category:'Trousers', audience:'Men', price:30000, sizes:['28','30','32','34','36','38'], colors:['Blue'], rating:4.8, description:'A reliable denim favourite. Classic blue jeans with a clean straight leg, made for repeat wear.'},
+  {id:7, name:"Women's Casual Dress", category:'Dresses', audience:'Women', price:25000, sizes, colors:['Beige'], rating:4.8, badge:'NEW', description:'An effortless midi dress in a warm neutral tone. An easy silhouette for brunch, errands, and everything in between.'},
+  {id:8, name:"Women's Premium Gown", category:'Dresses', audience:'Women', price:35000, sizes, colors:['Black'], rating:4.9, description:'Understated elegance for your next occasion. A full-length black gown with a graceful shape and satin-inspired finish.'},
+  {id:9, name:'Unisex Sweatshirt', category:'Hoodies', audience:'Unisex', price:22000, sizes, colors:['Oat'], rating:4.7, description:'A cosy crewneck for everyone. Soft oat-toned fabric and an easy, relaxed fit make this a layering favourite.'},
+  {id:10, name:'Polo Shirt', category:'T-Shirts', audience:'Men', price:20000, sizes, colors:['Navy'], rating:4.6, description:'Smart without trying too hard. A navy polo with a textured finish, neat collar, and everyday comfort.'},
+  {id:11, name:'Fashion Cap', category:'Accessories', audience:'Unisex', price:8000, sizes:['One Size'], colors:['Black'], rating:4.7, description:'The finishing touch. A clean black cap with an adjustable back and a classic curved peak.'},
+  {id:12, name:'Premium Joggers', category:'Trousers', audience:'Unisex', price:22000, sizes, colors:['Charcoal'], rating:4.8, badge:'NEW', description:'Made for your off-duty days. Soft charcoal joggers with an elastic waist and a modern tapered leg.'},
+];
+export const filters = ['All','Men','Women','T-Shirts','Hoodies','Trousers','Dresses','Accessories'];
+export const matchesCategory = (p, f) => f === 'All' || p.category === f || p.audience === f || (p.audience === 'Unisex' && ['Men','Women'].includes(f));
